@@ -1,0 +1,102 @@
+:root {
+    --primary: #0077B6;
+    --secondary: #00B4D8;
+    --text: #212529;
+    --bg: #F8F9FA;
+    --white: #FFFFFF;
+    --error: #DC3545;
+}
+
+body {
+    font-family: 'Assistant', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, .logo {
+    font-family: 'Rubik', sans-serif;
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    padding: 5px;
+}
+
+nav a:focus {
+    outline: 2px solid var(--primary);
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.search-box {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+input {
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+button {
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    background: var(--secondary);
+}
+
+button:focus {
+    outline: 3px solid var(--secondary);
+}
+
+.result-container {
+    margin-top: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    padding: 0 1rem;
+}
