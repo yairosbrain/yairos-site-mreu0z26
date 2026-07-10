@@ -8,18 +8,17 @@ async function searchVehicle() {
         return;
     }
 
-    resultArea.innerHTML = '<p aria-live="polite">מתחבר למאגר הנתונים הממשלתי...</p>';
+    resultArea.innerHTML = '<p aria-live="polite">טוען נתונים, אנא המתן...</p>';
 
     try {
-        // שימוש ב-API של מאגר הנתונים הממשלתי (data.gov.il)
         const response = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f06774365&q=${vin}`);
         const data = await response.json();
 
         if (data.success && data.result.records.length > 0) {
             const car = data.result.records[0];
             resultArea.innerHTML = `
-                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" role="region">
-                    <h3 id="report-title">דוח מפורט עבור מספר רכב: ${vin}</h3>
+                <div class="result-card" role="region">
+                    <h3>דוח מפורט עבור מספר רכב: ${vin}</h3>
                     <hr>
                     <p><strong>יצרן:</strong> ${car.tozar || 'לא ידוע'}</p>
                     <p><strong>דגם:</strong> ${car.kinuy_mishari || 'לא ידוע'}</p>
@@ -30,7 +29,7 @@ async function searchVehicle() {
                 </div>
             `;
         } else {
-            resultArea.innerHTML = '<p style="color: var(--error)">לא נמצא מידע עבור מספר רכב זה במאגר הממשלתי.</p>';
+            resultArea.innerHTML = '<p style="color: var(--error)">לא נמצא מידע עבור מספר רכב זה.</p>';
         }
     } catch (error) {
         resultArea.innerHTML = '<p style="color: var(--error)">שגיאה בחיבור למאגר הנתונים. אנא נסה שוב מאוחר יותר.</p>';
