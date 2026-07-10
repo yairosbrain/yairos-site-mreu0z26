@@ -11,12 +11,13 @@ async function searchVehicle() {
     resultArea.innerHTML = '<p aria-live="polite">טוען נתונים, אנא המתן...</p>';
 
     try {
-        // Using a CORS proxy to bypass the data.gov.il CORS restriction
-        const proxyUrl = 'https://corsproxy.io/?';
+        // Using allorigins.win as an alternative reliable CORS proxy
         const targetUrl = `https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f06774365&q=${vin}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         
-        const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
-        const data = await response.json();
+        const response = await fetch(proxyUrl);
+        const jsonResponse = await response.json();
+        const data = JSON.parse(jsonResponse.contents);
 
         if (data.success && data.result.records.length > 0) {
             const car = data.result.records[0];
@@ -36,6 +37,6 @@ async function searchVehicle() {
             resultArea.innerHTML = '<p style="color: var(--error)">לא נמצא מידע עבור מספר רכב זה.</p>';
         }
     } catch (error) {
-        resultArea.innerHTML = '<p style="color: var(--error)">שגיאה בחיבור למאגר הנתונים (ייתכן שהשרת חסום זמנית). אנא נסה שוב מאוחר יותר.</p>';
+        resultArea.innerHTML = '<p style="color: var(--error)">שגיאה בחיבור למאגר הנתונים. אנא נסה שוב מאוחר יותר.</p>';
     }
 }
